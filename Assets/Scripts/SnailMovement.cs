@@ -12,6 +12,8 @@ public class SnailMovement : MonoBehaviour
     public float MoveSpeed;
     public float MouseSensitivity;
     private float camRotation = 0f;
+    public float gravity = -9.8f;
+    public float yVelocity = 0f;
 
     //bools
     public bool gameActive;
@@ -35,8 +37,9 @@ public class SnailMovement : MonoBehaviour
             // X/Z movement
             float forwardMovement = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
             float sideMovement = Input.GetAxis("Horizontal") * MoveSpeed * Time.deltaTime;
+            yVelocity += gravity *= Time.deltaTime;
 
-            movement += (transform.forward * forwardMovement) + (transform.right * sideMovement);
+            movement += (transform.forward * forwardMovement) + (transform.right * sideMovement) + (transform.up * yVelocity);
 
             //cam movement
             float mouseInputY = Input.GetAxis("Mouse Y") * MouseSensitivity;
