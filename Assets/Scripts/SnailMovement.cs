@@ -44,7 +44,7 @@ public class SnailMovement : MonoBehaviour
             //cam movement
             float mouseInputY = Input.GetAxis("Mouse Y") * MouseSensitivity;
             camRotation -= mouseInputY;
-            camRotation = Mathf.Clamp(camRotation, -90f, 90f);
+            camRotation = Mathf.Clamp(camRotation, 16f, 90f);
             CamTransform.localRotation = Quaternion.Euler(new Vector3(camRotation, 0f, 0f));
 
             float mouseInputX = Input.GetAxis("Mouse X") * MouseSensitivity;
