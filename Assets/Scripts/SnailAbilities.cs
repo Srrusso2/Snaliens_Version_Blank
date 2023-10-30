@@ -9,7 +9,6 @@ public class SnailAbilities : MonoBehaviour
     public GameObject snailien;
     public GameObject snailienShell;
     public GAME_MANAGER gm;
-    public SnailMovement snailienMover;
     public Vector3 amountToGrow = new Vector3(0.5f, 0.5f, 0.5f);
     public float foodCounter = 0;
     public float numPlantsToGrowth = 1;
