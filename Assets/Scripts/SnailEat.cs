@@ -7,6 +7,9 @@ public class SnailEat : MonoBehaviour
     public GameObject[] snailFood;
     public GAME_MANAGER gm;
     public GameObject whoHitMe;
+    public Vector3 amountToGrow = new Vector3(0.5f, 0.5f, 0.5f);
+    public float foodCounter = 0;
+    public float numPlantsToGrow = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +26,21 @@ public class SnailEat : MonoBehaviour
             {
                 Debug.Log("Eating...");
                 Destroy(food);
+
+                foodCounter++;
+                if(foodCounter == numPlantsToGrow)
+                {
+                    Grow(amountToGrow);
+                }
             }
         }
+    }
+
+    private void Grow(Vector3 amountToGrow)
+    {
+        Debug.Log("Growing...");
+        transform.localScale += amountToGrow;
+        foodCounter = 0;
+        numPlantsToGrow += 2;
     }
 }
