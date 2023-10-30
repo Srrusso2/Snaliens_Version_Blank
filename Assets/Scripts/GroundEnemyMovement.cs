@@ -7,6 +7,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     public float enemySpeedReg; //speed for when the enemy is regularly moving
     public float enemySpeedHungry; //speed for when the enemy is charging at the player
     public float enemyRotation;
+    public float enemySightRange; //range of raycast for detecting snails
     void Start(){
         
     }
@@ -17,8 +18,7 @@ public class GroundEnemyMovement : MonoBehaviour{
         //(or something like that) but it does that in a certain range and if it finds an object with that script it goes directly toawrds it
 		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit)){
             Debug.DrawLine(transform.position + transform.TransformDirection(Vector3.forward), hit.point, Color.cyan);
-            Rigidbody hitRB = hit.collider.GetComponent<Rigidbody>();
-			if(hit.collider.GetComponent<SnailMovement>()==null){
+			if(hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange){
                 enemySpeed=enemySpeedReg;
 				transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                 transform.Rotate(0.0f, enemyRotation, 0.0f, Space.Self);
