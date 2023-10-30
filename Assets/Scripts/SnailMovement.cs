@@ -50,4 +50,12 @@ public class SnailMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, mouseInputX, 0f));
         }
     }
+
+    public void increaseMoveSpeed(float increment)
+    {
+        if(MoveSpeed < gm.snailienManager.speedCap)
+        {
+            MoveSpeed += increment;
+        }
+    }
 }

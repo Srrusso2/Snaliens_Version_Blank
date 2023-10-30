@@ -28,6 +28,10 @@ public class UI_Manager : MonoBehaviour
                 pauseScreen.gameObject.SetActive(true);
                 gm.gameActive = false;
                 growText.gameObject.SetActive(false);
+                if(snailienHidingText.gameObject.activeSelf)
+                {
+                    snailienHidingText.gameObject.SetActive(false);
+                }
             }
             else
             {
@@ -55,7 +59,7 @@ public class UI_Manager : MonoBehaviour
 
         if(gm.gameActive)
         {
-            growText.SetText("Number of Plants Until Next Growth: " + gm.snailienManager.numPlantsToGrowth);
+            growText.SetText("Number of Plants Until Next Growth: " + (gm.snailienManager.numPlantsToGrowth - gm.snailienManager.foodCounter));
         }
 
         if(gm.snailienManager.snailienHiding)

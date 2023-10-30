@@ -8,9 +8,13 @@ public class SnailAbilities : MonoBehaviour
     public GameObject whoHitMe;
     public GameObject snailien;
     public GameObject snailienShell;
+    public GAME_MANAGER gm;
+    public SnailMovement snailienMover;
     public Vector3 amountToGrow = new Vector3(0.5f, 0.5f, 0.5f);
     public float foodCounter = 0;
     public float numPlantsToGrowth = 1;
+    public float speedCap = 50f;
+    public float speedIncrement = 0.5f;
     public bool snailienHiding = false; 
 
     // Start is called before the first frame update
@@ -21,7 +25,7 @@ public class SnailAbilities : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space) && gm.gameActive)
         {
             if(snailienHiding)
             {
@@ -59,6 +63,7 @@ public class SnailAbilities : MonoBehaviour
         transform.localScale += amountToGrow;
         foodCounter = 0;
         numPlantsToGrowth += 2;
+        GetComponent<SnailMovement>().increaseMoveSpeed(speedIncrement);
     }
 
     private void Hide(bool isHiding)

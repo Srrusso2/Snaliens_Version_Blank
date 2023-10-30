@@ -3642,9 +3642,13 @@ MonoBehaviour:
   whoHitMe: {fileID: 0}
   snailien: {fileID: 622832306}
   snailienShell: {fileID: 162609999}
+  gm: {fileID: 1726617717}
+  snailienMover: {fileID: 1639186836}
   amountToGrow: {x: 0.5, y: 0.5, z: 0.5}
   foodCounter: 0
   numPlantsToGrowth: 1
+  speedCap: 50
+  speedIncrement: 0.5
   snailienHiding: 0
 --- !u!1 &1644603045
 GameObject:
