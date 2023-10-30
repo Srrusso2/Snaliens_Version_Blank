@@ -8,6 +8,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     public float enemySpeedHungry; //speed for when the enemy is charging at the player
     public float enemyRotation;
     public float enemySightRange; //range of raycast for detecting snails
+    public GAME_MANAGER gm;
     void Start(){
         
     }

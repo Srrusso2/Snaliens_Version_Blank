@@ -7,6 +7,7 @@ public class SnailMovement : MonoBehaviour
     //components
     public CharacterController CC;
     public Transform CamTransform;
+    public GAME_MANAGER gm;
 
     //floats
     public float MoveSpeed;
@@ -15,22 +16,19 @@ public class SnailMovement : MonoBehaviour
     public float gravity = -9.8f;
     public float yVelocity = 0f;
 
-    //bools
-    public bool gameActive;
-
     // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
 
         //will use this later when menu overlays are a thing
-        gameActive = true;
+        gm.gameActive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameActive)
+        if(gm.gameActive)
         {
             Vector3 movement = Vector3.zero;
 
