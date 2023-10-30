@@ -5,11 +5,10 @@ using UnityEngine;
 public class SnailEat : MonoBehaviour
 {
     public GameObject[] snailFood;
-    public GAME_MANAGER gm;
     public GameObject whoHitMe;
     public Vector3 amountToGrow = new Vector3(0.5f, 0.5f, 0.5f);
     public float foodCounter = 0;
-    public float numPlantsToGrow = 1;
+    public float numPlantsToGrowth = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +27,7 @@ public class SnailEat : MonoBehaviour
                 Destroy(food);
 
                 foodCounter++;
-                if(foodCounter == numPlantsToGrow)
+                if(foodCounter == numPlantsToGrowth)
                 {
                     Grow(amountToGrow);
                 }
@@ -41,6 +40,6 @@ public class SnailEat : MonoBehaviour
         Debug.Log("Growing...");
         transform.localScale += amountToGrow;
         foodCounter = 0;
-        numPlantsToGrow += 2;
+        numPlantsToGrowth += 2;
     }
 }

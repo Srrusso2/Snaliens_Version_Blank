@@ -20,9 +20,6 @@ public class SnailMovement : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-
-        //will use this later when menu overlays are a thing
-        gm.gameActive = true;
     }
 
     // Update is called once per frame

@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class GAME_MANAGER : MonoBehaviour
 {
-    public bool gameActive;
+    public bool gameActive = false;
+    public UI_Manager uiManager;
+    public SnailEat snailEat;
 }
