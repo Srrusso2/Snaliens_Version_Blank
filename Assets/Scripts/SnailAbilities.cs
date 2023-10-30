@@ -2,18 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnailEat : MonoBehaviour
+public class SnailAbilities : MonoBehaviour
 {
     public GameObject[] snailFood;
     public GameObject whoHitMe;
+    public GameObject snailien;
+    public GameObject snailienShell;
     public Vector3 amountToGrow = new Vector3(0.5f, 0.5f, 0.5f);
     public float foodCounter = 0;
     public float numPlantsToGrowth = 1;
+    public bool snailienHiding = false; 
 
     // Start is called before the first frame update
     void Start()
     {
         snailFood = GameObject.FindGameObjectsWithTag("SnailFood");
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(snailienHiding)
+            {
+                Hide(false);
+            }
+            else
+            {
+                Hide(true);
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -41,5 +59,21 @@ public class SnailEat : MonoBehaviour
         transform.localScale += amountToGrow;
         foodCounter = 0;
         numPlantsToGrowth += 2;
+    }
+
+    private void Hide(bool isHiding)
+    {
+        if(isHiding)
+        {
+            snailienShell.SetActive(true);
+            snailien.SetActive(false);
+        }
+        else
+        {
+            snailien.SetActive(true);
+            snailienShell.SetActive(false);
+        }
+
+        snailienHiding = isHiding;
     }
 }

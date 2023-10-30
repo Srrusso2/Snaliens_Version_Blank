@@ -6,5 +6,5 @@ public class GAME_MANAGER : MonoBehaviour
 {
     public bool gameActive = false;
     public UI_Manager uiManager;
-    public SnailEat snailEat;
+    public SnailAbilities snailienManager;
 }

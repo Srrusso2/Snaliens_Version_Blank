@@ -10,6 +10,7 @@ public class UI_Manager : MonoBehaviour
     public TMP_Text startScreen;
     public TMP_Text pauseScreen;
     public TMP_Text growText;
+    public TMP_Text snailienHidingText;
     public RawImage loseScreen;
     public RawImage enemyWarning;
 
@@ -54,7 +55,16 @@ public class UI_Manager : MonoBehaviour
 
         if(gm.gameActive)
         {
-            growText.SetText("Number of Plants Until Next Growth: " + gm.snailEat.numPlantsToGrowth);
+            growText.SetText("Number of Plants Until Next Growth: " + gm.snailienManager.numPlantsToGrowth);
+        }
+
+        if(gm.snailienManager.snailienHiding)
+        {
+            snailienHidingText.gameObject.SetActive(true);
+        }
+        else
+        {
+            snailienHidingText.gameObject.SetActive(false);
         }
     }
 }

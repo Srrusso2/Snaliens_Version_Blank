@@ -27,14 +27,18 @@ public class SnailMovement : MonoBehaviour
     {
         if(gm.gameActive)
         {
-            Vector3 movement = Vector3.zero;
+            if (!gm.snailienManager.snailienHiding)
+            {
+                Vector3 movement = Vector3.zero;
 
-            // X/Z movement
-            float forwardMovement = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
-            float sideMovement = Input.GetAxis("Horizontal") * MoveSpeed * Time.deltaTime;
-            yVelocity += gravity *= Time.deltaTime;
+                // X/Z movement
+                float forwardMovement = Input.GetAxis("Vertical") * MoveSpeed * Time.deltaTime;
+                float sideMovement = Input.GetAxis("Horizontal") * MoveSpeed * Time.deltaTime;
+                yVelocity += gravity *= Time.deltaTime;
 
-            movement += (transform.forward * forwardMovement) + (transform.right * sideMovement) + (transform.up * yVelocity);
+                movement += (transform.forward * forwardMovement) + (transform.right * sideMovement) + (transform.up * yVelocity);
+                CC.Move(movement);
+            }
 
             //cam movement
             float mouseInputY = Input.GetAxis("Mouse Y") * MouseSensitivity;
@@ -44,8 +48,6 @@ public class SnailMovement : MonoBehaviour
 
             float mouseInputX = Input.GetAxis("Mouse X") * MouseSensitivity;
             transform.rotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, mouseInputX, 0f));
-
-            CC.Move(movement);
         }
     }
 }
