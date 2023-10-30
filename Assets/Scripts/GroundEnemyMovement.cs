@@ -24,13 +24,10 @@ public class GroundEnemyMovement : MonoBehaviour{
                     enemySpeed=enemySpeedReg;
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                     transform.Rotate(0.0f, enemyRotation, 0.0f, Space.Self);
-/*                    gm.uiManager.enemyWarning.gameObject.SetActive(false);
-                    Debug.Log("Warning off");*/
                 }else{
                     enemySpeed=enemySpeedHungry;
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
-/*                    gm.uiManager.enemyWarning.gameObject.SetActive(true);
-                    Debug.Log("Warning On");*/
+                    gm.uiManager.showWarning();
                 }
             }
         }

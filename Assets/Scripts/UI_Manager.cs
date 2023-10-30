@@ -14,6 +14,8 @@ public class UI_Manager : MonoBehaviour
     public RawImage loseScreen;
     public RawImage enemyWarning;
 
+    private float warningTimer;
+
     void Start()
     {
         startScreen.gameObject.SetActive(true);
@@ -69,6 +71,21 @@ public class UI_Manager : MonoBehaviour
         else
         {
             snailienHidingText.gameObject.SetActive(false);
+        }
+
+        warningTimer -= Time.deltaTime;
+        if(warningTimer <= 0)
+        {
+            enemyWarning.gameObject.SetActive(false);
+        }
+    }
+
+    public void showWarning()
+    {
+        warningTimer = 1f;
+        if(!enemyWarning.gameObject.activeSelf)
+        {
+            enemyWarning.gameObject.SetActive(true);
         }
     }
 }
