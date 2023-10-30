@@ -2391,7 +2391,7 @@ MonoBehaviour:
   CC: {fileID: 1639186837}
   CamTransform: {fileID: 963194228}
   gm: {fileID: 1726617717}
-  MoveSpeed: 40
+  MoveSpeed: 10
   MouseSensitivity: 20
   gravity: -9.8
   yVelocity: 0
@@ -2428,6 +2428,9 @@ MonoBehaviour:
   snailFood: []
   gm: {fileID: 1726617717}
   whoHitMe: {fileID: 0}
+  amountToGrow: {x: 0.5, y: 0.5, z: 0.5}
+  foodCounter: 0
+  numPlantsToGrow: 1
 --- !u!1 &1644603045
 GameObject:
   m_ObjectHideFlags: 0
