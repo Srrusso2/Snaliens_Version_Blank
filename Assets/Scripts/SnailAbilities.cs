@@ -15,7 +15,7 @@ public class SnailAbilities : MonoBehaviour
     public float speedCap = 50f;
     public float speedIncrement = 0.5f;
     public bool snailienHiding = false; 
-
+    public Vector3 snailSize = new Vector3(0,0,0);
     // Start is called before the first frame update
     void Start()
     {
