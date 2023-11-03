@@ -34,6 +34,10 @@ public class GroundEnemyMovement : MonoBehaviour{
                     canWormAttack=true;
                 }
             }
+            if(gm.snailienManager.transform.localScale.y>maxSnailienEatSize.y){
+                transform.gameObject.tag = "SnailFood";
+                gm.snailienManager.snailFood = GameObject.FindGameObjectsWithTag("SnailFood");
+            }
         }
     }
 
