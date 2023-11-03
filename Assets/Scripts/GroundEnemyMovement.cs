@@ -11,8 +11,10 @@ public class GroundEnemyMovement : MonoBehaviour{
     public GAME_MANAGER gm;
     public Vector3 maxSnailienEatSize;
     public bool canWormAttack=true;
+    public Vector3 enemyStartPos;
+    public bool hasAttacked=false;
     void Start(){
-        
+        enemyStartPos = gameObject.transform.position;
     }
 
     void Update(){
@@ -23,15 +25,23 @@ public class GroundEnemyMovement : MonoBehaviour{
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit)){
                 Debug.DrawLine(transform.position + transform.TransformDirection(Vector3.forward), hit.point, Color.cyan);
                 if(hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.transform.localScale.y>maxSnailienEatSize.y){
-                    enemySpeed=enemySpeedReg;
-                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
-                    transform.Rotate(0.0f, enemyRotation, 0.0f, Space.Self);
-                    canWormAttack=false;
+                    if(hasAttacked==true){
+                        transform.position = Vector3.MoveTowards(transform.position, enemyStartPos, enemySpeed*Time.deltaTime);
+                        if(gameObject.transform.position==enemyStartPos){
+                            hasAttacked=false;
+                        }
+                    }else{
+                        enemySpeed=enemySpeedReg;
+                        transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                        transform.Rotate(0.0f, enemyRotation, 0.0f, Space.Self);
+                        canWormAttack=false;
+                    }
                 }else{
                     enemySpeed=enemySpeedHungry;
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                     gm.uiManager.showWarning();
                     canWormAttack=true;
+                    hasAttacked=true;
                 }
             }
             if(gm.snailienManager.transform.localScale.y>maxSnailienEatSize.y){
