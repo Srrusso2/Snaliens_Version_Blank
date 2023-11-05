@@ -15,7 +15,6 @@ public class SnailAbilities : MonoBehaviour
     public float speedCap = 50f;
     public float speedIncrement = 0.5f;
     public bool snailienHiding = false;
-    public bool snailienSprinting = false;
     public AudioClip eatingSound;
     public AudioClip warningSound;
     
