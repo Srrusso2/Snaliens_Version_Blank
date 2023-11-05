@@ -40,6 +40,7 @@ public class GroundEnemyMovement : MonoBehaviour{
                     enemySpeed=enemySpeedHungry;
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                     gm.uiManager.showWarning();
+                    AudioSource.PlayClipAtPoint(gm.snailienManager.warningSound,gm.snailienManager.transform.position);
                     canWormAttack=true;
                     hasAttacked=true;
                 }

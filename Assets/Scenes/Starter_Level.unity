@@ -2611,7 +2611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 950, y: 530}
+  m_AnchoredPosition: {x: 950.00006, y: 530}
   m_SizeDelta: {x: 1920, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &542066447
@@ -4504,7 +4504,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 950, y: -530}
+  m_AnchoredPosition: {x: 950.00006, y: -530}
   m_SizeDelta: {x: 1920, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1105544719
@@ -6335,6 +6335,8 @@ MonoBehaviour:
   speedCap: 50
   speedIncrement: 0.5
   snailienHiding: 0
+  eatingSound: {fileID: 8300000, guid: 224933f01b65c479e829cb86afebf6f2, type: 3}
+  warningSound: {fileID: 8300000, guid: a83dfd3991e3c45558d3e98df9abfab7, type: 3}
 --- !u!1 &1644603045
 GameObject:
   m_ObjectHideFlags: 0
