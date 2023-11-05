@@ -13,7 +13,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     public bool canWormAttack=true;
     public Vector3 enemyStartPos;
     public bool hasAttacked=false;
-    
+
     void Start(){
         enemyStartPos = gameObject.transform.position;
     }
@@ -35,7 +35,7 @@ public class GroundEnemyMovement : MonoBehaviour{
                         enemySpeed=enemySpeedReg;
                         transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                         transform.Rotate(0.0f, enemyRotation, 0.0f, Space.Self);
-                        canWormAttack=false;
+                        //canWormAttack=false;
                     }
                 }else{
                     enemySpeed=enemySpeedHungry;
