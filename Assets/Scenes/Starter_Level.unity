@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3827,7 +3827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.2217318, y: -0.0032595098, z: -0.008433789, w: 0.9750658}
-  m_LocalPosition: {x: 0.025013003, y: 1.1966667, z: -0.31600213}
+  m_LocalPosition: {x: 0.01, y: 2.02, z: -1.472}
   m_LocalScale: {x: 0.024995755, y: 0.014819992, z: 0.010808858}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5926,7 +5926,6 @@ MonoBehaviour:
   speedCap: 50
   speedIncrement: 0.5
   snailienHiding: 0
-  snailienSprinting: 0
   eatingSound: {fileID: 8300000, guid: 224933f01b65c479e829cb86afebf6f2, type: 3}
   warningSound: {fileID: 8300000, guid: a83dfd3991e3c45558d3e98df9abfab7, type: 3}
 --- !u!82 &1639186839
