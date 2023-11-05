@@ -15,6 +15,7 @@ public class SnailMovement : MonoBehaviour
     private float camRotation = 0f;
     public float gravity = -9.8f;
     public float yVelocity = 0f;
+    public float sprintMultiplier = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +52,16 @@ public class SnailMovement : MonoBehaviour
         }
     }
 
-    public void increaseMoveSpeed(float increment)
+    public void IncreaseBaseMoveSpeed(float increment)
     {
         if(MoveSpeed < gm.snailienManager.speedCap)
         {
             MoveSpeed += increment;
         }
+    }
+
+    public void Sprint()
+    {
+        MoveSpeed *= sprintMultiplier;
     }
 }

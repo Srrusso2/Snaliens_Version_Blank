@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5742,6 +5742,7 @@ MonoBehaviour:
   MouseSensitivity: 20
   gravity: -9.8
   yVelocity: 0
+  sprintMultiplier: 2
 --- !u!143 &1639186837
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5783,6 +5784,7 @@ MonoBehaviour:
   speedCap: 50
   speedIncrement: 0.5
   snailienHiding: 0
+  snailienSprinting: 0
   eatingSound: {fileID: 8300000, guid: 224933f01b65c479e829cb86afebf6f2, type: 3}
   warningSound: {fileID: 8300000, guid: a83dfd3991e3c45558d3e98df9abfab7, type: 3}
 --- !u!82 &1639186839

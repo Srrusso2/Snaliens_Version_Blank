@@ -14,7 +14,8 @@ public class SnailAbilities : MonoBehaviour
     public float numPlantsToGrowth = 1;
     public float speedCap = 50f;
     public float speedIncrement = 0.5f;
-    public bool snailienHiding = false; 
+    public bool snailienHiding = false;
+    public bool snailienSprinting = false;
     public AudioClip eatingSound;
     public AudioClip warningSound;
     
@@ -35,6 +36,17 @@ public class SnailAbilities : MonoBehaviour
                 Hide(true);
             }
         }
+        
+        if((Input.GetKeyDown(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding)
+        {
+            GetComponent<SnailMovement>().Sprint();
+        }
+
+        if((Input.GetKeyUp(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding)
+        {
+            GetComponent<SnailMovement>().MoveSpeed /= GetComponent<SnailMovement>().sprintMultiplier;
+        }
+
     }
 
     private void OnTriggerEnter(Collider collider){
@@ -61,7 +73,7 @@ public class SnailAbilities : MonoBehaviour
         transform.localScale += amountToGrow;
         foodCounter = 0;
         numPlantsToGrowth += 2;
-        GetComponent<SnailMovement>().increaseMoveSpeed(speedIncrement);
+        GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedIncrement);
     }
 
     private void Hide(bool isHiding){
