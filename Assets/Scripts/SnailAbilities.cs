@@ -17,18 +17,13 @@ public class SnailAbilities : MonoBehaviour
     public bool snailienHiding = false; 
     public AudioClip eatingSound;
     public AudioClip warningSound;
-    //public AudioSource source;
-
-    //public Vector3 snailSize = new Vector3(0,0,0);
-    // Start is called before the first frame update
-    void Start()
-    {
+    
+    void Start(){
         snailFood = GameObject.FindGameObjectsWithTag("SnailFood");
         //source.volume=2;
     }
 
-    void Update()
-    {
+    void Update(){
         if(Input.GetKeyDown(KeyCode.Space) && gm.gameActive)
         {
             if(snailienHiding)
@@ -42,8 +37,7 @@ public class SnailAbilities : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
-    {
+    private void OnTriggerEnter(Collider collider){
         whoHitMe = collider.gameObject;
         foreach (GameObject food in snailFood)
         {
@@ -62,8 +56,7 @@ public class SnailAbilities : MonoBehaviour
         }
     }
 
-    private void Grow(Vector3 amountToGrow)
-    {
+    private void Grow(Vector3 amountToGrow){
         Debug.Log("Growing...");
         transform.localScale += amountToGrow;
         foodCounter = 0;
@@ -71,8 +64,7 @@ public class SnailAbilities : MonoBehaviour
         GetComponent<SnailMovement>().increaseMoveSpeed(speedIncrement);
     }
 
-    private void Hide(bool isHiding)
-    {
+    private void Hide(bool isHiding){
         if(isHiding)
         {
             snailienShell.SetActive(true);

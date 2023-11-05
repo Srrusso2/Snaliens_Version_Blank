@@ -13,6 +13,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     public bool canWormAttack=true;
     public Vector3 enemyStartPos;
     public bool hasAttacked=false;
+    
     void Start(){
         enemyStartPos = gameObject.transform.position;
     }
