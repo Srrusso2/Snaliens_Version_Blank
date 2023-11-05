@@ -17,12 +17,14 @@ public class SnailAbilities : MonoBehaviour
     public bool snailienHiding = false; 
     public AudioClip eatingSound;
     public AudioClip warningSound;
+    //public AudioSource source;
 
     //public Vector3 snailSize = new Vector3(0,0,0);
     // Start is called before the first frame update
     void Start()
     {
         snailFood = GameObject.FindGameObjectsWithTag("SnailFood");
+        //source.volume=2;
     }
 
     void Update()
