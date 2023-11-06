@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - SnailFood
+  - Level2Ability
+  - Undefined
+  - OtherAbilities
   layers:
   - Default
   - TransparentFX

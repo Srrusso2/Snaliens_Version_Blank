@@ -9,11 +9,12 @@ public class SnailAbilities : MonoBehaviour
     public GameObject snailien;
     public GameObject snailienShell;
     public GAME_MANAGER gm;
-    public Vector3 amountToGrow = new Vector3(0.5f, 0.5f, 0.5f);
+    public Vector3 amountToGrow = new Vector3(0.2f, 0.3f, 0.5f);
     public float foodCounter = 0;
-    public float numPlantsToGrowth = 1;
+    public float numPlantsToGrowth = 10;
     public float speedCap = 50f;
     public float speedIncrement = 0.5f;
+    public int level = 1;
     public bool snailienHiding = false;
     public bool hasHideAbility = false;
     public bool hasSprintAbility = false;
@@ -73,8 +74,13 @@ public class SnailAbilities : MonoBehaviour
         Debug.Log("Growing...");
         transform.localScale += amountToGrow;
         foodCounter = 0;
-        numPlantsToGrowth += 2;
+        level++;
+        numPlantsToGrowth += 20;
         GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedIncrement);
+        if (level == 2)
+        {
+            gm.uiManager.levelUp(level);
+        }
     }
 
     private void Hide(bool isHiding){
@@ -95,10 +101,12 @@ public class SnailAbilities : MonoBehaviour
     public void gainHideAbility()
     {
         hasHideAbility = true;
+        gm.uiManager.continueGameFromLevelUp();
     }
 
     public void gainSprintAbility()
     {
         hasSprintAbility = true;
+        gm.uiManager.continueGameFromLevelUp();
     }
 }

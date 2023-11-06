@@ -7,19 +7,23 @@ using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
     public GAME_MANAGER gm;
-    public TMP_Text startScreen;
+    public TMP_Text levelUpScreen;
     public TMP_Text pauseScreen;
     public TMP_Text growText;
     public TMP_Text snailienHidingText;
     public RawImage loseScreen;
     public RawImage enemyWarning;
+    public GameObject[] abilities;
 
     private float warningTimer;
 
     void Start()
     {
-        switchCursorState(false);
-        startScreen.gameObject.SetActive(true);
+        switchCursorState(true);
+        List<GameObject> abilities = new List<GameObject>();
+        abilities.Add(GameObject.FindGameObjectsWithTag("Level2Abilities"));
+       /* abilities = GameObject.FindGameObjectsWithTag("Level2Abilities") + GameObject.FindGameObjectsWithTag("OtherAbilities");*/
+        //levelUpScreen.gameObject.SetActive(true);
     }
 
     void Update()
@@ -86,10 +90,20 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    public void startGame()
+    public void levelUp(int level)
     {
+        switchCursorState(false);
+        gm.gameActive = false;
+        levelUpScreen.gameObject.SetActive(true);
+        //we will have an array of button objects tagged 'abilities'. these buttons will also have level tags, ie 'level 2'
+        //we will use the level tags and level parameter to determine which buttons are active within the level up screen
+    }
+
+    public void continueGameFromLevelUp()
+    {
+        Debug.Log("Continue");
         switchCursorState(true);
-        startScreen.gameObject.SetActive(false);
+        levelUpScreen.gameObject.SetActive(false);
         gm.gameActive = true;
         growText.gameObject.SetActive(true);
     }
