@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1480416109809937728}
   m_Layer: 0
   m_Name: mushroom_Food
-  m_TagString: Untagged
+  m_TagString: SnailFood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

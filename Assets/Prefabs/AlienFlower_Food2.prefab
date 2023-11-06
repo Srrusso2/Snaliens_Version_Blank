@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 8785224509103998955}
   m_Layer: 0
   m_Name: AlienFlower_Food2
-  m_TagString: Untagged
+  m_TagString: SnailFood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

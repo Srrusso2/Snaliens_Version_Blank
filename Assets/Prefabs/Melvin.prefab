@@ -115,7 +115,7 @@ MonoBehaviour:
   enemySpeedReg: 10
   enemySpeedHungry: 50
   enemyRotation: 0.01
-  enemySightRange: 250
+  enemySightRange: 50
   gm: {fileID: 0}
   maxSnailienEatSize: {x: 0, y: 8, z: 0}
   canWormAttack: 1
