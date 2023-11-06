@@ -20,9 +20,9 @@ public class SnailMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gm.gameActive)
+        Vector3 movement = Vector3.zero;
+        if (gm.gameActive)
         {
-            Vector3 movement = Vector3.zero;
             if (!gm.snailienManager.snailienHiding)
             {
                 // X/Z movement
@@ -51,6 +51,16 @@ public class SnailMovement : MonoBehaviour
 
             float mouseInputX = Input.GetAxis("Mouse X") * MouseSensitivity;
             transform.rotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, mouseInputX, 0f));
+        }
+        else
+        {
+            float forwardMovement = 0;
+            float sideMovement = 0;
+            yVelocity += gravity *= Time.deltaTime;
+
+            movement += (transform.forward * forwardMovement) + (transform.right * sideMovement) + (transform.up * yVelocity);
+
+            CC.Move(movement);
         }
     }
 

@@ -32,6 +32,7 @@ public class UI_Manager : MonoBehaviour
 
         foreach (GameObject ability in GameObject.FindGameObjectsWithTag("OtherAbilities"))
         {
+            Debug.Log("Add other abilities");
             abilities.Add(ability);
         }
 
@@ -128,7 +129,8 @@ public class UI_Manager : MonoBehaviour
         }
         else
         {
-            foreach(GameObject ability in abilities)
+            levelUpScreen.SetText("YOU LEVELED UP! YAY! Sorry...we haven't made the abilities yet");
+            foreach (GameObject ability in abilities)
             {
                 if(ability.CompareTag("OtherAbilities"))
                 {
