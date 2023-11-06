@@ -11,6 +11,7 @@ public class UI_Manager : MonoBehaviour
     public TMP_Text pauseScreen;
     public TMP_Text growText;
     public TMP_Text snailienHidingText;
+    public TMP_Text levelText;
     public RawImage loseScreen;
     public RawImage enemyWarning;
     public List<GameObject> abilities = new List<GameObject>();
@@ -36,21 +37,21 @@ public class UI_Manager : MonoBehaviour
 
         levelUpScreen.gameObject.SetActive(false);
         growText.gameObject.SetActive(true);
-        /* abilities = GameObject.FindGameObjectsWithTag("Level2Abilities") + GameObject.FindGameObjectsWithTag("OtherAbilities");*/
-        //levelUpScreen.gameObject.SetActive(true);
+        levelText.gameObject.SetActive(true);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            if(gm.gameActive)
+            if (gm.gameActive)
             {
                 switchCursorState(false);
                 pauseScreen.gameObject.SetActive(true);
                 gm.gameActive = false;
                 growText.gameObject.SetActive(false);
-                if(snailienHidingText.gameObject.activeSelf)
+                levelText.gameObject.SetActive(false);
+                if (snailienHidingText.gameObject.activeSelf)
                 {
                     snailienHidingText.gameObject.SetActive(false);
                 }
@@ -63,35 +64,34 @@ public class UI_Manager : MonoBehaviour
                     pauseScreen.gameObject.SetActive(false);
                     gm.gameActive = true;
                     growText.gameObject.SetActive(true);
+                    levelText.gameObject.SetActive(true);
                 }
                 else
                 {
                     loseScreen.gameObject.SetActive(false);
                     gm.gameActive = true;
                     growText.gameObject.SetActive(true);
+                    levelText.gameObject.SetActive(true);
                     Application.LoadLevel(Application.loadedLevel);
                 }
             }
-        }
-
-        if(gm.gameActive)
-        {
-            growText.SetText("Number of Plants Until Next Growth: " + (gm.snailienManager.numPlantsToGrowth - gm.snailienManager.foodCounter));
-        }
-
-        if(gm.snailienManager.snailienHiding)
-        {
-            snailienHidingText.gameObject.SetActive(true);
-        }
-        else
-        {
-            snailienHidingText.gameObject.SetActive(false);
         }
 
         warningTimer -= Time.deltaTime;
         if(warningTimer <= 0)
         {
             enemyWarning.gameObject.SetActive(false);
+        }
+
+        if (gm.gameActive == false)
+        {
+            Rigidbody rb = gm.snailienManager.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+        }
+        else
+        {
+            Rigidbody rb = gm.snailienManager.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.None;
         }
     }
 
@@ -109,7 +109,10 @@ public class UI_Manager : MonoBehaviour
         switchCursorState(false);
         gm.gameActive = false;
         levelUpScreen.gameObject.SetActive(true);
-        if(level == 2)
+        levelText.SetText("Level: " + gm.snailienManager.level);
+        growText.gameObject.SetActive(false);
+        levelText.gameObject.SetActive(false);
+        if (level == 2)
         {
             foreach(GameObject ability in abilities)
             {
@@ -145,6 +148,7 @@ public class UI_Manager : MonoBehaviour
         levelUpScreen.gameObject.SetActive(false);
         gm.gameActive = true;
         growText.gameObject.SetActive(true);
+        levelText.gameObject.SetActive(true);
     }
 
     public void switchCursorState(bool locked)
@@ -156,6 +160,23 @@ public class UI_Manager : MonoBehaviour
         else
         {
             Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
+
+    public void changeGrowText(float numPlants)
+    {
+        growText.SetText("Number of Plants Until Next Growth: " + numPlants);
+    }
+
+    public void changeHidingText(bool hiding)
+    {
+        if(hiding)
+        {
+            snailienHidingText.gameObject.SetActive(true);
+        }
+        else
+        {
+            snailienHidingText.gameObject.SetActive(false);
         }
     }
 }

@@ -23,6 +23,7 @@ public class SnailAbilities : MonoBehaviour
     
     void Start(){
         snailFood = GameObject.FindGameObjectsWithTag("SnailFood");
+        gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
         //source.volume=2;
     }
 
@@ -51,14 +52,16 @@ public class SnailAbilities : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider collider){
+    private void OnTriggerEnter(Collider collider)
+    {
         whoHitMe = collider.gameObject;
         foreach (GameObject food in snailFood)
         {
-            if (food == whoHitMe)
+            if (food == whoHitMe && !snailienHiding)
             {
                 Debug.Log("Eating...");
                 AudioSource.PlayClipAtPoint(eatingSound,transform.position);
+                gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
                 Destroy(food);
 
                 foodCounter++;
@@ -70,26 +73,31 @@ public class SnailAbilities : MonoBehaviour
         }
     }
 
-    private void Grow(Vector3 amountToGrow){
+    private void Grow(Vector3 amountToGrow)
+    {
         Debug.Log("Growing...");
         transform.localScale += amountToGrow;
         foodCounter = 0;
         level++;
         numPlantsToGrowth += 20;
+        gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
         GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedIncrement);
         gm.uiManager.levelUp(level);
     }
 
-    private void Hide(bool isHiding){
+    private void Hide(bool isHiding)
+    {
         if(isHiding)
         {
             snailienShell.SetActive(true);
             snailien.SetActive(false);
+            gm.uiManager.changeHidingText(true);
         }
         else
         {
             snailien.SetActive(true);
             snailienShell.SetActive(false);
+            gm.uiManager.changeHidingText(false);
         }
 
         snailienHiding = isHiding;
