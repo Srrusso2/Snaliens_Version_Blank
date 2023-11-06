@@ -72,3 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/Materials/NewLayer 3.terrainlayer
 Assets/Materials/NewLayer 3.terrainlayer.meta
+Assets/Materials/Bulbs.mat
+Assets/Materials/Bulbs.mat.meta
