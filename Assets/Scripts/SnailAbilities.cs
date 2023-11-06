@@ -15,6 +15,8 @@ public class SnailAbilities : MonoBehaviour
     public float speedCap = 50f;
     public float speedIncrement = 0.5f;
     public bool snailienHiding = false;
+    public bool hasHideAbility = false;
+    public bool hasSprintAbility = false;
     public AudioClip eatingSound;
     public AudioClip warningSound;
     
@@ -24,7 +26,7 @@ public class SnailAbilities : MonoBehaviour
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Space) && gm.gameActive)
+        if(Input.GetKeyDown(KeyCode.Space) && gm.gameActive && hasHideAbility)
         {
             if(snailienHiding)
             {
@@ -36,12 +38,12 @@ public class SnailAbilities : MonoBehaviour
             }
         }
         
-        if((Input.GetKeyDown(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding)
+        if((Input.GetKeyDown(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding && hasSprintAbility)
         {
             GetComponent<SnailMovement>().Sprint();
         }
 
-        if((Input.GetKeyUp(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding)
+        if((Input.GetKeyUp(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding && hasSprintAbility)
         {
             GetComponent<SnailMovement>().MoveSpeed /= GetComponent<SnailMovement>().sprintMultiplier;
         }
@@ -88,5 +90,15 @@ public class SnailAbilities : MonoBehaviour
         }
 
         snailienHiding = isHiding;
+    }
+
+    public void gainHideAbility()
+    {
+        hasHideAbility = true;
+    }
+
+    public void gainSprintAbility()
+    {
+        hasSprintAbility = true;
     }
 }

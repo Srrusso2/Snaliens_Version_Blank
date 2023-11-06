@@ -18,6 +18,7 @@ public class UI_Manager : MonoBehaviour
 
     void Start()
     {
+        switchCursorState(false);
         startScreen.gameObject.SetActive(true);
     }
 
@@ -27,6 +28,7 @@ public class UI_Manager : MonoBehaviour
         {
             if(gm.gameActive)
             {
+                switchCursorState(false);
                 pauseScreen.gameObject.SetActive(true);
                 gm.gameActive = false;
                 growText.gameObject.SetActive(false);
@@ -37,13 +39,8 @@ public class UI_Manager : MonoBehaviour
             }
             else
             {
-                if(startScreen.gameObject.activeSelf)
-                {
-                    startScreen.gameObject.SetActive(false);
-                    gm.gameActive = true;
-                    growText.gameObject.SetActive(true);
-                }
-                else if(pauseScreen.gameObject.activeSelf)
+                switchCursorState(true);
+                if (pauseScreen.gameObject.activeSelf)
                 {
                     pauseScreen.gameObject.SetActive(false);
                     gm.gameActive = true;
@@ -86,6 +83,26 @@ public class UI_Manager : MonoBehaviour
         if(!enemyWarning.gameObject.activeSelf)
         {
             enemyWarning.gameObject.SetActive(true);
+        }
+    }
+
+    public void startGame()
+    {
+        switchCursorState(true);
+        startScreen.gameObject.SetActive(false);
+        gm.gameActive = true;
+        growText.gameObject.SetActive(true);
+    }
+
+    public void switchCursorState(bool locked)
+    {
+        if(locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
         }
     }
 }
