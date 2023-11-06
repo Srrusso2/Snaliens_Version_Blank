@@ -77,10 +77,7 @@ public class SnailAbilities : MonoBehaviour
         level++;
         numPlantsToGrowth += 20;
         GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedIncrement);
-        if (level == 2)
-        {
-            gm.uiManager.levelUp(level);
-        }
+        gm.uiManager.levelUp(level);
     }
 
     private void Hide(bool isHiding){

@@ -13,16 +13,30 @@ public class UI_Manager : MonoBehaviour
     public TMP_Text snailienHidingText;
     public RawImage loseScreen;
     public RawImage enemyWarning;
-    public GameObject[] abilities;
+    public List<GameObject> abilities = new List<GameObject>();
 
     private float warningTimer;
 
     void Start()
     {
         switchCursorState(true);
-        List<GameObject> abilities = new List<GameObject>();
-        abilities.Add(GameObject.FindGameObjectsWithTag("Level2Abilities"));
-       /* abilities = GameObject.FindGameObjectsWithTag("Level2Abilities") + GameObject.FindGameObjectsWithTag("OtherAbilities");*/
+        abilities = new List<GameObject>();
+
+        levelUpScreen.gameObject.SetActive(true);
+
+        foreach(GameObject ability in GameObject.FindGameObjectsWithTag("Level2Ability"))
+        {
+            abilities.Add(ability);
+        }
+
+        foreach (GameObject ability in GameObject.FindGameObjectsWithTag("OtherAbilities"))
+        {
+            abilities.Add(ability);
+        }
+
+        levelUpScreen.gameObject.SetActive(false);
+        growText.gameObject.SetActive(true);
+        /* abilities = GameObject.FindGameObjectsWithTag("Level2Abilities") + GameObject.FindGameObjectsWithTag("OtherAbilities");*/
         //levelUpScreen.gameObject.SetActive(true);
     }
 
@@ -95,13 +109,38 @@ public class UI_Manager : MonoBehaviour
         switchCursorState(false);
         gm.gameActive = false;
         levelUpScreen.gameObject.SetActive(true);
-        //we will have an array of button objects tagged 'abilities'. these buttons will also have level tags, ie 'level 2'
-        //we will use the level tags and level parameter to determine which buttons are active within the level up screen
+        if(level == 2)
+        {
+            foreach(GameObject ability in abilities)
+            {
+                if(ability.CompareTag("Level2Ability"))
+                {
+                    ability.gameObject.SetActive(true);
+                }
+                else
+                {
+                    ability.gameObject.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            foreach(GameObject ability in abilities)
+            {
+                if(ability.CompareTag("OtherAbilities"))
+                {
+                    ability.gameObject.SetActive(true);
+                }
+                else
+                {
+                    ability.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
     public void continueGameFromLevelUp()
     {
-        Debug.Log("Continue");
         switchCursorState(true);
         levelUpScreen.gameObject.SetActive(false);
         gm.gameActive = true;
