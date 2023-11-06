@@ -12,6 +12,7 @@ public class UI_Manager : MonoBehaviour
     public TMP_Text growText;
     public TMP_Text snailienHidingText;
     public TMP_Text levelText;
+    public TMP_Text coolDownText;
     public RawImage loseScreen;
     public RawImage enemyWarning;
     public List<GameObject> abilities = new List<GameObject>();
@@ -30,9 +31,13 @@ public class UI_Manager : MonoBehaviour
             abilities.Add(ability);
         }
 
+        foreach (GameObject ability in GameObject.FindGameObjectsWithTag("Level3Ability"))
+        {
+            abilities.Add(ability);
+        }
+
         foreach (GameObject ability in GameObject.FindGameObjectsWithTag("OtherAbilities"))
         {
-            Debug.Log("Add other abilities");
             abilities.Add(ability);
         }
 
@@ -84,6 +89,9 @@ public class UI_Manager : MonoBehaviour
             enemyWarning.gameObject.SetActive(false);
         }
 
+        string displayedTime = gm.snailienManager.coolDownTimer.ToString("F0");
+        coolDownText.SetText(gm.snailienManager.cooledDownAbility + " Cooldown: " + displayedTime);
+
         if (gm.gameActive == false)
         {
             Rigidbody rb = gm.snailienManager.GetComponent<Rigidbody>();
@@ -118,6 +126,20 @@ public class UI_Manager : MonoBehaviour
             foreach(GameObject ability in abilities)
             {
                 if(ability.CompareTag("Level2Ability"))
+                {
+                    ability.gameObject.SetActive(true);
+                }
+                else
+                {
+                    ability.gameObject.SetActive(false);
+                }
+            }
+        }
+        else if(level == 3)
+        {
+            foreach (GameObject ability in abilities)
+            {
+                if (ability.CompareTag("Level3Ability"))
                 {
                     ability.gameObject.SetActive(true);
                 }
@@ -180,5 +202,10 @@ public class UI_Manager : MonoBehaviour
         {
             snailienHidingText.gameObject.SetActive(false);
         }
+    }
+
+    public void showCoolDownText(bool isInCoolDown)
+    {
+        coolDownText.gameObject.SetActive(isInCoolDown);
     }
 }

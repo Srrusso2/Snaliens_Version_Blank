@@ -8,6 +8,7 @@ TagManager:
   - Level2Ability
   - Undefined
   - OtherAbilities
+  - Level3Ability
   layers:
   - Default
   - TransparentFX

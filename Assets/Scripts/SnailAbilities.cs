@@ -9,15 +9,22 @@ public class SnailAbilities : MonoBehaviour
     public GameObject snailien;
     public GameObject snailienShell;
     public GAME_MANAGER gm;
+
     public float growthMultiplier = 2;
     public float foodCounter = 0;
     public float numPlantsToGrowth = 10;
     public float speedCap = 50f;
     public float speedMultiplier = 2.0f;
+    public float coolDownTimer = -1;
+    public float coolDownLength = 20;
     public int level = 1;
+
+    public string cooledDownAbility = "";
+
     public bool snailienHiding = false;
     public bool hasHideAbility = false;
     public bool hasSprintAbility = false;
+
     public AudioClip eatingSound;
     public AudioClip warningSound;
     
@@ -33,6 +40,7 @@ public class SnailAbilities : MonoBehaviour
             if(snailienHiding)
             {
                 Hide(false);
+                startCoolDown(coolDownLength, "Hide");
             }
             else
             {
@@ -48,6 +56,17 @@ public class SnailAbilities : MonoBehaviour
         if((Input.GetKeyUp(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding && hasSprintAbility)
         {
             GetComponent<SnailMovement>().MoveSpeed /= GetComponent<SnailMovement>().sprintMultiplier;
+            startCoolDown(coolDownLength, "Sprint");
+        }
+
+        coolDownTimer -= Time.deltaTime;
+        if (coolDownTimer <= 0)
+        {
+            endCoolDown(cooledDownAbility);
+        }
+        else if (coolDownTimer > 0)
+        {
+            Debug.Log(coolDownTimer);
         }
 
     }
@@ -101,6 +120,37 @@ public class SnailAbilities : MonoBehaviour
         snailienHiding = isHiding;
     }
 
+    public void startCoolDown(float time, string ability)
+    {
+        coolDownTimer = time;
+        if (ability.Equals("Sprint"))
+        {
+            cooledDownAbility = "Sprint";
+            hasSprintAbility = false;
+        }
+        else if (ability.Equals("Hide"))
+        {
+            cooledDownAbility = "Hide";
+            hasHideAbility = false;
+        }
+
+        gm.uiManager.showCoolDownText(true);
+    }
+
+    public void endCoolDown(string ability)
+    {
+        if (ability.Equals("Sprint"))
+        {
+            hasSprintAbility = true;
+        }
+        else if (ability.Equals("Hide"))
+        {
+            hasHideAbility = true;
+        }
+
+        gm.uiManager.showCoolDownText(false);
+    }
+
     public void gainHideAbility()
     {
         hasHideAbility = true;
@@ -110,6 +160,12 @@ public class SnailAbilities : MonoBehaviour
     public void gainSprintAbility()
     {
         hasSprintAbility = true;
+        gm.uiManager.continueGameFromLevelUp();
+    }
+
+    public void shortenCoolDown()
+    {
+        coolDownLength /= 2;
         gm.uiManager.continueGameFromLevelUp();
     }
 }

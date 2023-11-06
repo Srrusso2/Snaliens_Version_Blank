@@ -16,7 +16,7 @@ public class SnailMovement : MonoBehaviour
     public float gravity = -9.8f;
     public float yVelocity = 0f;
     public float sprintMultiplier = 2.0f;
-
+    
     // Update is called once per frame
     void Update()
     {
