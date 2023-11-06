@@ -64,11 +64,11 @@ public class SnailMovement : MonoBehaviour
         }
     }
 
-    public void IncreaseBaseMoveSpeed(float increment)
+    public void IncreaseBaseMoveSpeed(float multiplier)
     {
         if(MoveSpeed < gm.snailienManager.speedCap)
         {
-            MoveSpeed += increment;
+            MoveSpeed *= multiplier;
         }
     }
 

@@ -9,11 +9,11 @@ public class SnailAbilities : MonoBehaviour
     public GameObject snailien;
     public GameObject snailienShell;
     public GAME_MANAGER gm;
-    public Vector3 amountToGrow = new Vector3(0.2f, 0.3f, 0.5f);
+    public float growthMultiplier = 2;
     public float foodCounter = 0;
     public float numPlantsToGrowth = 10;
     public float speedCap = 50f;
-    public float speedIncrement = 0.5f;
+    public float speedMultiplier = 2.0f;
     public int level = 1;
     public bool snailienHiding = false;
     public bool hasHideAbility = false;
@@ -59,7 +59,6 @@ public class SnailAbilities : MonoBehaviour
         {
             if (food == whoHitMe && !snailienHiding)
             {
-                Debug.Log("Eating...");
                 AudioSource.PlayClipAtPoint(eatingSound,transform.position);
                 gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
                 Destroy(food);
@@ -67,21 +66,20 @@ public class SnailAbilities : MonoBehaviour
                 foodCounter++;
                 if(foodCounter == numPlantsToGrowth)
                 {
-                    Grow(amountToGrow);
+                    Grow();
                 }
             }
         }
     }
 
-    private void Grow(Vector3 amountToGrow)
+    private void Grow()
     {
-        Debug.Log("Growing...");
-        transform.localScale += amountToGrow;
+        transform.localScale *= growthMultiplier;
         foodCounter = 0;
         level++;
         numPlantsToGrowth += 20;
         gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
-        GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedIncrement);
+        GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedMultiplier);
         gm.uiManager.levelUp(level);
     }
 
