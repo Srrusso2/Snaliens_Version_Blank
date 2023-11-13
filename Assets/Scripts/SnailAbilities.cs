@@ -15,9 +15,12 @@ public class SnailAbilities : MonoBehaviour
     public float numPlantsToGrowth = 10;
     public float speedCap = 50f;
     public float speedMultiplier = 2.0f;
-    public float coolDownTimer = -1;
-    public float coolDownLength = 20;
     public int level = 1;
+
+    public float coolDownTimer = -1;
+    public float coolDownLength = 7;
+    public float abilityTimeLimit = 3;
+    public float abilityTimer = -1;
 
     public string cooledDownAbility = "";
 
@@ -34,7 +37,8 @@ public class SnailAbilities : MonoBehaviour
         //source.volume=2;
     }
 
-    void Update(){
+    void Update()
+    {
         if(Input.GetKeyDown(KeyCode.Space) && gm.gameActive && hasHideAbility)
         {
             if(snailienHiding)
@@ -50,24 +54,26 @@ public class SnailAbilities : MonoBehaviour
         
         if((Input.GetKeyDown(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding && hasSprintAbility)
         {
+            abilityTimer = abilityTimeLimit;
             GetComponent<SnailMovement>().Sprint();
         }
 
-        if((Input.GetKeyUp(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding && hasSprintAbility)
-        {
-            GetComponent<SnailMovement>().MoveSpeed /= GetComponent<SnailMovement>().sprintMultiplier;
-            startCoolDown(coolDownLength, "Sprint");
-        }
-
+        //TIMERS
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer <= 0)
         {
             endCoolDown(cooledDownAbility);
         }
-        else if (coolDownTimer > 0)
+
+        abilityTimer -= Time.deltaTime;
+        if (abilityTimer <= 0 && abilityTimer > -1)
         {
-            Debug.Log(coolDownTimer);
+            GetComponent<SnailMovement>().endSprint();
+            startCoolDown(coolDownLength, "Sprint");
         }
+        Debug.Log(abilityTimer);
+
+        gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
 
     }
 
@@ -79,7 +85,6 @@ public class SnailAbilities : MonoBehaviour
             if (food == whoHitMe && !snailienHiding)
             {
                 AudioSource.PlayClipAtPoint(eatingSound,transform.position);
-                gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
                 Destroy(food);
 
                 foodCounter++;

@@ -10,12 +10,13 @@ public class SnailMovement : MonoBehaviour
     public GAME_MANAGER gm;
 
     //floats
-    public float MoveSpeed;
+    public float MoveSpeed = 10;
+    public float currentBaseSpeed = 10;
     public float MouseSensitivity;
     private float camRotation = 0f;
     public float gravity = -9.8f;
     public float yVelocity = 0f;
-    public float sprintMultiplier = 2.0f;
+    public float sprintMultiplier = 3.0f;
     
     // Update is called once per frame
     void Update()
@@ -70,10 +71,17 @@ public class SnailMovement : MonoBehaviour
         {
             MoveSpeed *= multiplier;
         }
+
+        currentBaseSpeed = MoveSpeed;
     }
 
     public void Sprint()
     {
         MoveSpeed *= sprintMultiplier;
+    }
+
+    public void endSprint()
+    {
+        MoveSpeed = currentBaseSpeed;
     }
 }
