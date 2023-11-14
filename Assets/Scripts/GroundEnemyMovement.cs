@@ -6,16 +6,19 @@ public class GroundEnemyMovement : MonoBehaviour{
     public float enemySpeed;
     public float enemySpeedReg; //speed for when the enemy is regularly moving
     public float enemySpeedHungry; //speed for when the enemy is charging at the player
-    public float enemyRotation;
+    public float enemyRotationY;
     public float enemySightRange; //range of raycast for detecting snails
     public GAME_MANAGER gm;
     public int maxSnailienEatLevel;
     public bool canWormAttack=true;
     public Vector3 enemyStartPos;
     public bool hasAttacked=false;
+    public GameObject cone;
+    public EnemySightCode esc;
 
     void Start(){
         enemyStartPos = gameObject.transform.position;
+        esc=cone.GetComponent<EnemySightCode>();
     }
 
     void Update(){
@@ -26,14 +29,14 @@ public class GroundEnemyMovement : MonoBehaviour{
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit)){
                 Debug.DrawLine(transform.position + transform.TransformDirection(Vector3.forward), hit.point, Color.cyan);
                 if(hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.level>=maxSnailienEatLevel){
-                    transform.position = Vector3.MoveTowards(transform.position, enemyStartPos, enemySpeed*Time.deltaTime);
+                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                    transform.Rotate(0.0f,enemyRotationY,0.0f, Space.Self);
                 }else{
                     enemySpeed=enemySpeedHungry;
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                     gm.uiManager.showWarning();
                     AudioSource.PlayClipAtPoint(gm.snailienManager.warningSound,gm.snailienManager.transform.position);
                     canWormAttack=true;
-                    hasAttacked=true;
                 }
             }
             if(gm.snailienManager.level>maxSnailienEatLevel){

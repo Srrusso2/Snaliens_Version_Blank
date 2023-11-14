@@ -9,6 +9,7 @@ TagManager:
   - Undefined
   - OtherAbilities
   - Level3Ability
+  - TEST TAG
   layers:
   - Default
   - TransparentFX
