@@ -10,6 +10,10 @@ TagManager:
   - OtherAbilities
   - Level3Ability
   - TEST TAG
+  - Mushroom
+  - BulbTree
+  - TallFlower
+  - SmallFlower
   layers:
   - Default
   - TransparentFX

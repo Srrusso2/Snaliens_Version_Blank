@@ -85,10 +85,34 @@ public class SnailAbilities : MonoBehaviour
             if (food == whoHitMe && !snailienHiding)
             {
                 AudioSource.PlayClipAtPoint(eatingSound,transform.position);
-                Destroy(food);
 
-                foodCounter++;
-                if(foodCounter == numPlantsToGrowth)
+                if (food.GetComponent<TallFlower>() && level >= food.GetComponent<TallFlower>().level)
+                {
+                    foodCounter += food.GetComponent<TallFlower>().growthPoints;
+                    Destroy(food);
+                }
+                else if(food.GetComponent<SmallFlower>() && level >= food.GetComponent<SmallFlower>().level)
+                {
+                    foodCounter += food.GetComponent<SmallFlower>().growthPoints;
+                    Destroy(food);
+                }
+                else if(food.GetComponent<BulbTree>() && level >= food.GetComponent<BulbTree>().level)
+                {
+                    foodCounter += food.GetComponent<BulbTree>().growthPoints;
+                    Destroy(food);
+                }
+                else if(food.GetComponent<Mushroom>() && level >= food.GetComponent<Mushroom>().level)
+                {
+                    foodCounter += food.GetComponent<Mushroom>().growthPoints;
+                    Destroy(food);
+                }
+                else if(food.GetComponent<GroundEnemyMovement>())
+                {
+                    foodCounter += food.GetComponent<GroundEnemyMovement>().growthPoints;
+                    Destroy(food);
+                }
+
+                if (foodCounter >= numPlantsToGrowth)
                 {
                     Grow();
                 }
@@ -99,10 +123,10 @@ public class SnailAbilities : MonoBehaviour
     private void Grow()
     {
         transform.localScale *= growthMultiplier;
-        foodCounter = 0;
+        foodCounter -= numPlantsToGrowth;
         level++;
         numPlantsToGrowth += 20;
-        gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
+        //gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
         GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedMultiplier);
         gm.uiManager.levelUp(level);
     }

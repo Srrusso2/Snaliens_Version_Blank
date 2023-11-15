@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3635239709919126274}
   - component: {fileID: 3888944299339176419}
+  - component: {fileID: 7954438037528114241}
   m_Layer: 0
   m_Name: AlienFlower_Food Better
   m_TagString: SnailFood
@@ -215,6 +216,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &7954438037528114241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4123370836548647352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3412eab1b1ba0a458ec0cb5c7eb2dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  growthPoints: 1
 --- !u!1 &6278210114840510927
 GameObject:
   m_ObjectHideFlags: 0
