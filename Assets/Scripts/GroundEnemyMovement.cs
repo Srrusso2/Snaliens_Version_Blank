@@ -18,7 +18,8 @@ public class GroundEnemyMovement : MonoBehaviour{
 
     void Start(){
         enemyStartPos = gameObject.transform.position;
-        esc=cone.GetComponent<EnemySightCode>();
+        cone = gameObject.transform.GetChild(1).gameObject;
+        esc = cone.GetComponent<EnemySightCode>();
     }
 
     void Update(){
@@ -28,15 +29,15 @@ public class GroundEnemyMovement : MonoBehaviour{
             //(or something like that) but it does that in a certain range and if it finds an object with that script it goes directly toawrds it
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit)){
                 Debug.DrawLine(transform.position + transform.TransformDirection(Vector3.forward), hit.point, Color.cyan);
-                if(hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.level>=maxSnailienEatLevel){
+                if(esc.objectInCollider.tag!="Player"||hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.level>=maxSnailienEatLevel){
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                     transform.Rotate(0.0f,enemyRotationY,0.0f, Space.Self);
                 }else{
-                    enemySpeed=enemySpeedHungry;
+                    /*enemySpeed=enemySpeedHungry;
                     transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                     gm.uiManager.showWarning();
                     AudioSource.PlayClipAtPoint(gm.snailienManager.warningSound,gm.snailienManager.transform.position);
-                    canWormAttack=true;
+                    canWormAttack=true;*/
                 }
             }
             if(gm.snailienManager.level>maxSnailienEatLevel){

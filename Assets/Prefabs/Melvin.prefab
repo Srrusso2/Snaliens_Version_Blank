@@ -114,13 +114,15 @@ MonoBehaviour:
   enemySpeed: 10
   enemySpeedReg: 10
   enemySpeedHungry: 50
-  enemyRotation: 0.01
+  enemyRotationY: 0.01
   enemySightRange: 50
   gm: {fileID: 0}
-  maxSnailienEatSize: {x: 0, y: 8, z: 0}
+  maxSnailienEatLevel: 0
   canWormAttack: 1
   enemyStartPos: {x: 0, y: 0, z: 0}
   hasAttacked: 0
+  cone: {fileID: 0}
+  esc: {fileID: 0}
 --- !u!1001 &3872961965761119278
 PrefabInstance:
   m_ObjectHideFlags: 0

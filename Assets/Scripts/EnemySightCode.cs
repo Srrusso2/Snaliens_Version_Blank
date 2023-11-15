@@ -16,10 +16,10 @@ public class EnemySightCode : MonoBehaviour{
 
     void OnTriggerEnter(Collider collider){
         objectInCollider=collider.gameObject;
-        
+        Debug.Log("Enter");
     }
 
     void OnTriggerStay(Collider collider){
-
+        Debug.Log("Stayed");
     }
 }
