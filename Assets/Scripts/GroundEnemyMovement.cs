@@ -19,6 +19,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     public Vector3 right45;
     public Vector3 left45;
     public bool hits1=false,hits2=false,hits3=false;
+    RaycastHit hit;
 
     void Start(){
         enemyStartPos = gameObject.transform.position;
@@ -30,7 +31,7 @@ public class GroundEnemyMovement : MonoBehaviour{
 
     void Update(){
         if(gm.gameActive==true){
-            RaycastHit hit;
+            
             RaycastHit hit2;
             RaycastHit hit3;
 
@@ -85,7 +86,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     }
 
     private void OnTriggerEnter(Collider collider){
-        if(canWormAttack==true){
+        if(canWormAttack==true&&collider.tag=="Player"&&hit.distance<=20){
             gm.uiManager.loseScreen.gameObject.SetActive(true);
             gm.uiManager.growText.gameObject.SetActive(false);
             gm.gameActive = false;
