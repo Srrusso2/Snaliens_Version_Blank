@@ -8,6 +8,7 @@ public class SnailMovement : MonoBehaviour
     public CharacterController CC;
     public Transform CamTransform;
     public GAME_MANAGER gm;
+    public Rigidbody rb;
 
     //floats
     public float MoveSpeed = 10;
@@ -63,6 +64,21 @@ public class SnailMovement : MonoBehaviour
 
             CC.Move(movement);
         }
+
+/*        if (Input.GetKeyDown(KeyCode.X))
+        {
+            float forwardMovement = 0;
+            float sideMovement = 0;
+            yVelocity += 2 * Time.deltaTime;
+            movement += (transform.forward * forwardMovement) + (transform.right * sideMovement) + (transform.up * yVelocity);
+            CC.Move(movement);
+        }
+
+        if (transform.position.y < 0)
+        {
+            gm.uiManager.setShowTipText("Press x to fix");
+            rb.constraints = RigidbodyConstraints.FreezePositionY;
+        }*/
     }
 
     public void IncreaseBaseMoveSpeed(float multiplier)
