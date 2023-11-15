@@ -159,7 +159,7 @@ public class UI_Manager : MonoBehaviour
         }
         else
         {
-            levelUpScreen.SetText("YOU LEVELED UP! YAY! Sorry...we haven't made the abilities yet");
+            levelUpScreen.SetText("YOU LEVELED UP! YAY! Sorry...we haven't made more abilities yet");
             foreach (GameObject ability in abilities)
             {
                 if(ability.CompareTag("OtherAbilities"))

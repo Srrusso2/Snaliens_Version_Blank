@@ -14,6 +14,7 @@ TagManager:
   - BulbTree
   - TallFlower
   - SmallFlower
+  - Level4Ability
   layers:
   - Default
   - TransparentFX
