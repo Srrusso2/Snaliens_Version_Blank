@@ -25515,7 +25515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4004210469815717261, guid: 418c5c4c235c54b33be5b617e179d1d2, type: 3}
       propertyPath: numPlantsToGrowth
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4004210469815717263, guid: 418c5c4c235c54b33be5b617e179d1d2, type: 3}
       propertyPath: gm
