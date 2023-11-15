@@ -10,7 +10,7 @@ public class SnailAbilities : MonoBehaviour
     public GameObject snailienShell;
     public GAME_MANAGER gm;
 
-    public float growthMultiplier = 2;
+    public Vector3 growthAmount = new Vector3(0.1f, 0.15f, 0.25f);
     public float foodCounter = 0;
     public float numPlantsToGrowth = 10;
     public float speedCap = 50f;
@@ -88,45 +88,60 @@ public class SnailAbilities : MonoBehaviour
 
                 if (food.GetComponent<TallFlower>() && level >= food.GetComponent<TallFlower>().level)
                 {
-                    foodCounter += food.GetComponent<TallFlower>().growthPoints;
+                    TallFlower tallFlower = food.GetComponent<TallFlower>();
+                    foodCounter += tallFlower.growthPoints;
+                    Grow(tallFlower.growthPoints);
                     Destroy(food);
                 }
                 else if(food.GetComponent<SmallFlower>() && level >= food.GetComponent<SmallFlower>().level)
                 {
-                    foodCounter += food.GetComponent<SmallFlower>().growthPoints;
+                    SmallFlower smallFlower = food.GetComponent<SmallFlower>();
+                    foodCounter += smallFlower.growthPoints;
+                    Grow(smallFlower.growthPoints);
                     Destroy(food);
                 }
                 else if(food.GetComponent<BulbTree>() && level >= food.GetComponent<BulbTree>().level)
                 {
-                    foodCounter += food.GetComponent<BulbTree>().growthPoints;
+                    BulbTree bulbTree = food.GetComponent<BulbTree>();
+                    foodCounter += bulbTree.growthPoints;
+                    Grow(bulbTree.growthPoints);
                     Destroy(food);
                 }
                 else if(food.GetComponent<Mushroom>() && level >= food.GetComponent<Mushroom>().level)
                 {
-                    foodCounter += food.GetComponent<Mushroom>().growthPoints;
+                    Mushroom mushroom = food.GetComponent<Mushroom>();
+                    foodCounter += mushroom.growthPoints;
+                    Grow(mushroom.growthPoints);
                     Destroy(food);
                 }
                 else if(food.GetComponent<GroundEnemyMovement>())
                 {
-                    foodCounter += food.GetComponent<GroundEnemyMovement>().growthPoints;
+                    GroundEnemyMovement enemy = food.GetComponent<GroundEnemyMovement>();
+                    foodCounter += enemy.growthPoints;
+                    Grow(enemy.growthPoints);
                     Destroy(food);
                 }
 
                 if (foodCounter >= numPlantsToGrowth)
                 {
-                    Grow();
+                    LevelUp();
                 }
             }
         }
     }
 
-    private void Grow()
+    private void Grow(int growthMultiplier)
     {
-        transform.localScale *= growthMultiplier;
+        growthAmount *= growthMultiplier;
+        transform.localScale += growthAmount;
+        growthAmount /= growthMultiplier;
+    }
+
+    private void LevelUp()
+    {
         foodCounter -= numPlantsToGrowth;
         level++;
         numPlantsToGrowth += 20;
-        //gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
         GetComponent<SnailMovement>().IncreaseBaseMoveSpeed(speedMultiplier);
         gm.uiManager.levelUp(level);
     }
