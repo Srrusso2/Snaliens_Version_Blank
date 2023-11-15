@@ -86,7 +86,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     }
 
     private void OnTriggerEnter(Collider collider){
-        if(canWormAttack==true&&collider.tag=="Player"&&hit.distance<=20){
+        if(canWormAttack==true&&collider.tag=="Player"&&hit.distance<=50){
             gm.uiManager.loseScreen.gameObject.SetActive(true);
             gm.uiManager.growText.gameObject.SetActive(false);
             gm.gameActive = false;
