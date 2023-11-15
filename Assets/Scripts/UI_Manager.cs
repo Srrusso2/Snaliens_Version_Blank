@@ -20,12 +20,14 @@ public class UI_Manager : MonoBehaviour
 
     public List<GameObject> abilities = new List<GameObject>();
     public PlayableDirector tipActivation;
+    Rigidbody rb;
 
 
     private float warningTimer;
 
     void Start()
     {
+        rb = gm.snailienManager.GetComponent<Rigidbody>();
         switchCursorState(true);
         abilities = new List<GameObject>();
 
@@ -70,13 +72,15 @@ public class UI_Manager : MonoBehaviour
                 {
                     pauseScreen.gameObject.SetActive(false);
                     gm.gameActive = true;
+                    rb.constraints = RigidbodyConstraints.None;
                     growText.gameObject.SetActive(true);
                     levelText.gameObject.SetActive(true);
                 }
                 else
                 {
                     loseScreen.gameObject.SetActive(false);
-                    gm.gameActive = true;
+                    gm.gameActive = true;  
+                    rb.constraints = RigidbodyConstraints.None;
                     growText.gameObject.SetActive(true);
                     levelText.gameObject.SetActive(true);
                     Application.LoadLevel(Application.loadedLevel);
@@ -95,14 +99,12 @@ public class UI_Manager : MonoBehaviour
 
         if (gm.gameActive == false)
         {
-            Rigidbody rb = gm.snailienManager.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezePosition;
         }
-        else
+/*        else
         {
-            Rigidbody rb = gm.snailienManager.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.None;
-        }
+        }*/
     }
 
     public void showWarning()
@@ -179,6 +181,8 @@ public class UI_Manager : MonoBehaviour
         switchCursorState(true);
         levelUpScreen.gameObject.SetActive(false);
         gm.gameActive = true;
+        
+        rb.constraints = RigidbodyConstraints.None;
         growText.gameObject.SetActive(true);
         levelText.gameObject.SetActive(true);
     }

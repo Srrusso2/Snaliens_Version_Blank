@@ -9,6 +9,7 @@ public class SnailAbilities : MonoBehaviour
     public GameObject snailien;
     public GameObject snailienShell;
     public GAME_MANAGER gm;
+    public Rigidbody rb;
 
     public Vector3 growthAmount = new Vector3(0.1f, 0.15f, 0.25f);
     public float foodCounter = 0;
@@ -31,7 +32,9 @@ public class SnailAbilities : MonoBehaviour
     public AudioClip eatingSound;
     public AudioClip warningSound;
     
-    void Start(){
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
         snailFood = GameObject.FindGameObjectsWithTag("SnailFood");
         gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
         //source.volume=2;
@@ -85,10 +88,10 @@ public class SnailAbilities : MonoBehaviour
         {
             if (food == whoHitMe && !snailienHiding)
             {
-                AudioSource.PlayClipAtPoint(eatingSound,transform.position);
 
                 if (food.GetComponent<TallFlower>() && level >= food.GetComponent<TallFlower>().level)
                 {
+                    AudioSource.PlayClipAtPoint(eatingSound, transform.position);
                     TallFlower tallFlower = food.GetComponent<TallFlower>();
                     foodCounter += tallFlower.growthPoints;
                     Grow(tallFlower.growthPoints);
@@ -96,6 +99,7 @@ public class SnailAbilities : MonoBehaviour
                 }
                 else if(food.GetComponent<SmallFlower>() && level >= food.GetComponent<SmallFlower>().level)
                 {
+                    AudioSource.PlayClipAtPoint(eatingSound, transform.position);
                     SmallFlower smallFlower = food.GetComponent<SmallFlower>();
                     foodCounter += smallFlower.growthPoints;
                     Grow(smallFlower.growthPoints);
@@ -103,6 +107,7 @@ public class SnailAbilities : MonoBehaviour
                 }
                 else if(food.GetComponent<BulbTree>() && level >= food.GetComponent<BulbTree>().level)
                 {
+                    AudioSource.PlayClipAtPoint(eatingSound, transform.position);
                     BulbTree bulbTree = food.GetComponent<BulbTree>();
                     foodCounter += bulbTree.growthPoints;
                     Grow(bulbTree.growthPoints);
@@ -110,6 +115,7 @@ public class SnailAbilities : MonoBehaviour
                 }
                 else if(food.GetComponent<Mushroom>() && level >= food.GetComponent<Mushroom>().level)
                 {
+                    AudioSource.PlayClipAtPoint(eatingSound, transform.position);
                     Mushroom mushroom = food.GetComponent<Mushroom>();
                     foodCounter += mushroom.growthPoints;
                     Grow(mushroom.growthPoints);
@@ -117,6 +123,7 @@ public class SnailAbilities : MonoBehaviour
                 }
                 else if(food.GetComponent<GroundEnemyMovement>())
                 {
+                    AudioSource.PlayClipAtPoint(eatingSound, transform.position);
                     GroundEnemyMovement enemy = food.GetComponent<GroundEnemyMovement>();
                     foodCounter += enemy.growthPoints;
                     Grow(enemy.growthPoints);
@@ -137,9 +144,11 @@ public class SnailAbilities : MonoBehaviour
 
     private void Grow(int growthMultiplier)
     {
+        rb.constraints = RigidbodyConstraints.FreezePosition;
         growthAmount *= growthMultiplier;
         transform.localScale += growthAmount;
         growthAmount /= growthMultiplier;
+        //rb.constraints = RigidbodyConstraints.None;
     }
 
     private void LevelUp()
