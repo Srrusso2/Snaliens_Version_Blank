@@ -60,7 +60,7 @@ public class GroundEnemyMovement : MonoBehaviour{
             if(esc.objectInCollider.tag!="Player"||hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.level>=maxSnailienEatLevel){
                 transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
                 transform.Rotate(0.0f,enemyRotationY,0.0f, Space.Self);
-                canWormAttack=false;
+                //canWormAttack=false;
             }else{
                 //enemySpeed=enemySpeedHungry;
                 //transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
