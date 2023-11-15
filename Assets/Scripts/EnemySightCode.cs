@@ -11,7 +11,9 @@ public class EnemySightCode : MonoBehaviour{
     }
 
     void Update(){
-        
+        if(objectInCollider==null){
+            objectInCollider=gem.gameObject.transform.GetChild(2).gameObject;
+        }
     }
 
     void OnTriggerEnter(Collider collider){
