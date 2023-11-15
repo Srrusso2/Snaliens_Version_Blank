@@ -71,7 +71,6 @@ public class SnailAbilities : MonoBehaviour
             GetComponent<SnailMovement>().endSprint();
             startCoolDown(coolDownLength, "Sprint");
         }
-        Debug.Log(abilityTimer);
 
         gm.uiManager.changeGrowText(numPlantsToGrowth - foodCounter);
 
