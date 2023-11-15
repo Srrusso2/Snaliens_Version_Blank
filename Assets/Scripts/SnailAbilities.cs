@@ -49,12 +49,14 @@ public class SnailAbilities : MonoBehaviour
             else
             {
                 Hide(true);
+                gm.uiManager.setShowTipText("Hiding in Shell");
             }
         }
         
         if((Input.GetKeyDown(KeyCode.LeftShift)) && gm.gameActive && !snailienHiding && hasSprintAbility)
         {
             abilityTimer = abilityTimeLimit;
+            gm.uiManager.setShowTipText("Sprinting");
             GetComponent<SnailMovement>().Sprint();
         }
 
@@ -120,6 +122,10 @@ public class SnailAbilities : MonoBehaviour
                     Grow(enemy.growthPoints);
                     Destroy(food);
                 }
+                else
+                {
+                    gm.uiManager.setShowTipText("Grow bigger first!");
+                }
 
                 if (foodCounter >= numPlantsToGrowth)
                 {
@@ -151,13 +157,11 @@ public class SnailAbilities : MonoBehaviour
         {
             snailienShell.SetActive(true);
             snailien.SetActive(false);
-            gm.uiManager.changeHidingText(true);
         }
         else
         {
             snailien.SetActive(true);
             snailienShell.SetActive(false);
-            gm.uiManager.changeHidingText(false);
         }
 
         snailienHiding = isHiding;
@@ -198,12 +202,14 @@ public class SnailAbilities : MonoBehaviour
     {
         hasHideAbility = true;
         gm.uiManager.continueGameFromLevelUp();
+        gm.uiManager.gm.uiManager.setShowTipText("Press Space to Hide");
     }
 
     public void gainSprintAbility()
     {
         hasSprintAbility = true;
         gm.uiManager.continueGameFromLevelUp();
+        gm.uiManager.gm.uiManager.setShowTipText("Press Shift to Sprint");
     }
 
     public void shortenCoolDown()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -10,12 +11,16 @@ public class UI_Manager : MonoBehaviour
     public TMP_Text levelUpScreen;
     public TMP_Text pauseScreen;
     public TMP_Text growText;
-    public TMP_Text snailienHidingText;
     public TMP_Text levelText;
     public TMP_Text coolDownText;
+    public TMP_Text tipText;
+
     public RawImage loseScreen;
     public RawImage enemyWarning;
+
     public List<GameObject> abilities = new List<GameObject>();
+    public PlayableDirector tipActivation;
+
 
     private float warningTimer;
 
@@ -57,10 +62,6 @@ public class UI_Manager : MonoBehaviour
                 gm.gameActive = false;
                 growText.gameObject.SetActive(false);
                 levelText.gameObject.SetActive(false);
-                if (snailienHidingText.gameObject.activeSelf)
-                {
-                    snailienHidingText.gameObject.SetActive(false);
-                }
             }
             else
             {
@@ -111,6 +112,13 @@ public class UI_Manager : MonoBehaviour
         {
             enemyWarning.gameObject.SetActive(true);
         }
+    }
+
+    public void setShowTipText(string text)
+    {
+        tipText.SetText(text);
+
+        tipActivation.Play();
     }
 
     public void levelUp(int level)
@@ -190,18 +198,6 @@ public class UI_Manager : MonoBehaviour
     public void changeGrowText(float numPlants)
     {
         growText.SetText("Number of Plants Until Next Growth: " + numPlants);
-    }
-
-    public void changeHidingText(bool hiding)
-    {
-        if(hiding)
-        {
-            snailienHidingText.gameObject.SetActive(true);
-        }
-        else
-        {
-            snailienHidingText.gameObject.SetActive(false);
-        }
     }
 
     public void showCoolDownText(bool isInCoolDown)
