@@ -33,21 +33,29 @@ public class GroundEnemyMovement : MonoBehaviour{
             RaycastHit hit;
             RaycastHit hit2;
             RaycastHit hit3;
+
             if (Physics.Raycast(transform.position, transform.TransformDirection(right45), out hit2)){
                 Debug.DrawLine(transform.position + transform.TransformDirection(right45), hit2.point, Color.cyan);
-                hits2=true;
-                hits3=false;
+                if(hit2.collider.GetComponent<SnailMovement>()!=null){
+                    hits2=true;
+                    hits3=false;
+                }
             }
             if (Physics.Raycast(transform.position, transform.TransformDirection(left45), out hit3)){
                 Debug.DrawLine(transform.position + transform.TransformDirection(left45), hit3.point, Color.cyan);
-                hits3=true;
-                hits2=false;
+                if(hit3.collider.GetComponent<SnailMovement>()!=null){
+                    hits3=true;
+                    hits2=false;
+                }
             }
+
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit)){
                 Debug.DrawLine(transform.position + transform.TransformDirection(Vector3.forward), hit.point, Color.cyan);
-                //Debug.Log("TELL ME DA WAY");
-                hits1=true;
+                if(hit.collider.GetComponent<SnailMovement>()!=null){
+                    hits1=true;
+                }
             }
+
             //Code that checks if the snailien is attackable
             if(esc.objectInCollider.tag!="Player"||hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.level>=maxSnailienEatLevel){
                 transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
@@ -61,9 +69,9 @@ public class GroundEnemyMovement : MonoBehaviour{
 
             if(esc.objectInCollider.tag=="Player"){
                 if(hits2==true){
-                    Debug.Log("hit right");
+                    
                 }else if(hits3==true){
-                    Debug.Log("hit left");
+                    transform.Rotate(0.0f,-enemyRotationY*2,0.0f, Space.Self);
                 }
             }
 
