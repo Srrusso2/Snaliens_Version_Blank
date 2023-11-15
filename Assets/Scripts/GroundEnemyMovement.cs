@@ -16,47 +16,62 @@ public class GroundEnemyMovement : MonoBehaviour{
     public GameObject cone;
     public EnemySightCode esc;
     public int growthPoints;
-    //public Vector3 right45 = (transform.forward + transform.right).normalized;
-    //ublic Vector3 left45 = (transform.forward - transform.right).normalized;
+    public Vector3 right45;
+    public Vector3 left45;
+    public bool hits1=false,hits2=false,hits3=false;
 
     void Start(){
         enemyStartPos = gameObject.transform.position;
         cone = gameObject.transform.GetChild(1).gameObject;
         esc = cone.GetComponent<EnemySightCode>();
+        right45=(Vector3.forward + Vector3.right).normalized;
+        left45=(Vector3.forward - Vector3.right).normalized;
     }
 
     void Update(){
         if(gm.gameActive==true){
             RaycastHit hit;
-            //RaycastHit hit2;
-            //RaycastHit hit3;
-            //Physics.Raycast(transform.position, transform.TransformDirection(right45);
-            // making it so that when a raycast is cast forward from the enemy a code checks if it has contacted the player through use of GetComponent<playerScript> 
-            //(or something like that) but it does that in a certain range and if it finds an object with that script it goes directly toawrds it
+            RaycastHit hit2;
+            RaycastHit hit3;
+            if (Physics.Raycast(transform.position, transform.TransformDirection(right45), out hit2)){
+                Debug.DrawLine(transform.position + transform.TransformDirection(right45), hit2.point, Color.cyan);
+                hits2=true;
+                hits3=false;
+            }
+            if (Physics.Raycast(transform.position, transform.TransformDirection(left45), out hit3)){
+                Debug.DrawLine(transform.position + transform.TransformDirection(left45), hit3.point, Color.cyan);
+                hits3=true;
+                hits2=false;
+            }
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit)){
                 Debug.DrawLine(transform.position + transform.TransformDirection(Vector3.forward), hit.point, Color.cyan);
-                Debug.DrawLine(transform.position + transform.TransformDirection(transform.forward + transform.right).normalized, hit.point, Color.cyan);
-                Debug.DrawLine(transform.position + transform.TransformDirection(transform.forward - transform.right).normalized, hit.point, Color.cyan);
-                if(esc.objectInCollider.tag!="Player"||hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.level>=maxSnailienEatLevel){
-                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
-                    transform.Rotate(0.0f,enemyRotationY,0.0f, Space.Self);
-                }else{
-                    enemySpeed=enemySpeedHungry;
-                    transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
-                    gm.uiManager.showWarning();
-                    AudioSource.PlayClipAtPoint(gm.snailienManager.warningSound,gm.snailienManager.transform.position);
-                    //canWormAttack=true;
+                //Debug.Log("TELL ME DA WAY");
+                hits1=true;
+            }
+            //Code that checks if the snailien is attackable
+            if(esc.objectInCollider.tag!="Player"||hit.collider.GetComponent<SnailMovement>()==null||hit.distance>enemySightRange||gm.snailienManager.snailienHiding||gm.snailienManager.level>=maxSnailienEatLevel){
+                transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                transform.Rotate(0.0f,enemyRotationY,0.0f, Space.Self);
+            }else{
+                //enemySpeed=enemySpeedHungry;
+                //transform.Translate(Vector3.forward * enemySpeed * Time.deltaTime);
+                //gm.uiManager.showWarning();
+                //AudioSource.PlayClipAtPoint(gm.snailienManager.warningSound,gm.snailienManager.transform.position);
+            }
+
+            if(esc.objectInCollider.tag=="Player"){
+                if(hits2==true){
+                    Debug.Log("hit right");
+                }else if(hits3==true){
+                    Debug.Log("hit left");
                 }
             }
-            if(esc.objectInCollider.tag=="Player"){
-                //if(esc.objectInCollider.){
 
-                //}
-            }
             if(gm.snailienManager.level>maxSnailienEatLevel){
                 transform.gameObject.tag = "SnailFood";
                 gm.snailienManager.snailFood = GameObject.FindGameObjectsWithTag("SnailFood");
             }
+
         }
     }
 
