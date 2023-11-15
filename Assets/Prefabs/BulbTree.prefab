@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 6236981124210620803}
   - component: {fileID: 6034008089863054798}
   m_Layer: 0
-  m_Name: AlienPlant_Food
+  m_Name: BulbTree
   m_TagString: SnailFood
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

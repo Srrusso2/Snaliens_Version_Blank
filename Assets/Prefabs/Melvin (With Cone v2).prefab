@@ -125,7 +125,7 @@ MonoBehaviour:
   hasAttacked: 0
   cone: {fileID: 8588126981351789911}
   esc: {fileID: 8588126981351789934}
-  growthPoints: 0
+  growthPoints: 6
   right45: {x: 0, y: 0, z: 0}
   left45: {x: 0, y: 0, z: 0}
   hits1: 0

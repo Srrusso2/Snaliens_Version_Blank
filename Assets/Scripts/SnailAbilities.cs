@@ -63,6 +63,11 @@ public class SnailAbilities : MonoBehaviour
             GetComponent<SnailMovement>().Sprint();
         }
 
+        if(snailFood.Length == 0)
+        {
+            gm.uiManager.showWinScreen();
+        }
+
         //TIMERS
         coolDownTimer -= Time.deltaTime;
         if (coolDownTimer <= 0)
@@ -96,6 +101,7 @@ public class SnailAbilities : MonoBehaviour
                     foodCounter += tallFlower.growthPoints;
                     Grow(tallFlower.growthPoints);
                     Destroy(food);
+                    gm.uiManager.setShowTipText("+3 GP");
                 }
                 else if(food.GetComponent<SmallFlower>() && level >= food.GetComponent<SmallFlower>().level)
                 {
@@ -104,6 +110,7 @@ public class SnailAbilities : MonoBehaviour
                     foodCounter += smallFlower.growthPoints;
                     Grow(smallFlower.growthPoints);
                     Destroy(food);
+                    gm.uiManager.setShowTipText("+1 GP");
                 }
                 else if(food.GetComponent<BulbTree>() && level >= food.GetComponent<BulbTree>().level)
                 {
@@ -112,6 +119,7 @@ public class SnailAbilities : MonoBehaviour
                     foodCounter += bulbTree.growthPoints;
                     Grow(bulbTree.growthPoints);
                     Destroy(food);
+                    gm.uiManager.setShowTipText("+5 GP");
                 }
                 else if(food.GetComponent<Mushroom>() && level >= food.GetComponent<Mushroom>().level)
                 {
@@ -120,6 +128,7 @@ public class SnailAbilities : MonoBehaviour
                     foodCounter += mushroom.growthPoints;
                     Grow(mushroom.growthPoints);
                     Destroy(food);
+                    gm.uiManager.setShowTipText("+7 GP");
                 }
                 else if(food.GetComponent<GroundEnemyMovement>())
                 {
@@ -128,6 +137,7 @@ public class SnailAbilities : MonoBehaviour
                     foodCounter += enemy.growthPoints;
                     Grow(enemy.growthPoints);
                     Destroy(food);
+                    gm.uiManager.setShowTipText("+6 GP");
                 }
                 else
                 {

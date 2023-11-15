@@ -15,7 +15,7 @@ public class GroundEnemyMovement : MonoBehaviour{
     public bool hasAttacked=false;
     public GameObject cone;
     public EnemySightCode esc;
-    public int growthPoints;
+    public int growthPoints = 6;
     public Vector3 right45;
     public Vector3 left45;
     public bool hits1=false,hits2=false,hits3=false;

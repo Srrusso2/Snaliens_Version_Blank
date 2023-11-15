@@ -17,6 +17,7 @@ public class UI_Manager : MonoBehaviour
 
     public RawImage loseScreen;
     public RawImage enemyWarning;
+    public RawImage winScreen;
 
     public List<GameObject> abilities = new List<GameObject>();
     public PlayableDirector tipActivation;
@@ -76,10 +77,19 @@ public class UI_Manager : MonoBehaviour
                     growText.gameObject.SetActive(true);
                     levelText.gameObject.SetActive(true);
                 }
-                else
+                else if(loseScreen.gameObject.activeSelf)
                 {
                     loseScreen.gameObject.SetActive(false);
                     gm.gameActive = true;  
+                    rb.constraints = RigidbodyConstraints.None;
+                    growText.gameObject.SetActive(true);
+                    levelText.gameObject.SetActive(true);
+                    Application.LoadLevel(Application.loadedLevel);
+                }
+                else
+                {
+                    winScreen.gameObject.SetActive(false);
+                    gm.gameActive = true;
                     rb.constraints = RigidbodyConstraints.None;
                     growText.gameObject.SetActive(true);
                     levelText.gameObject.SetActive(true);
@@ -114,6 +124,12 @@ public class UI_Manager : MonoBehaviour
         {
             enemyWarning.gameObject.SetActive(true);
         }
+    }
+
+    public void showWinScreen()
+    {
+        winScreen.gameObject.SetActive(true);
+        gm.gameActive = false;
     }
 
     public void setShowTipText(string text)
@@ -201,7 +217,7 @@ public class UI_Manager : MonoBehaviour
 
     public void changeGrowText(float numPlants)
     {
-        growText.SetText("Number of Plants Until Next Growth: " + numPlants);
+        growText.SetText("Growth Points (GP) Until Next Level: " + numPlants);
     }
 
     public void showCoolDownText(bool isInCoolDown)
